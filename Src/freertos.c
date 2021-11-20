@@ -26,7 +26,12 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "tim.h"
+#include "bmi088_driver.h"
+#include "bsp_spi.h"
+#include "pid.h"
+#include "bsp_delay.h"
+#include "user_task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -147,7 +152,7 @@ __weak void test_task(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    osDelay(100);
   }
   /* USER CODE END test_task */
 }
@@ -165,7 +170,7 @@ __weak void line_detect_task(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    osDelay(100);
   }
   /* USER CODE END line_detect_task */
 }
