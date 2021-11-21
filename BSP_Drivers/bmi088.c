@@ -1,12 +1,3 @@
-/****************************(C) COPYRIGHT 2021 AFShk***************************
-  ==============================================================================
-  * @file       bmi088.c/h
-  * @brief      BMI088Çý¶¯¡£
-  * @history
-  *  Version    Date            Author          Modification
-  *  V1.0.0     2021/8/27       AFShk           finish
-  ==============================================================================
-*****************************(C) COPYRIGHT 2021 AFShk**************************/
 #include "bmi088.h"
 #include "main.h"
 #include "cmsis_os.h"
@@ -16,7 +7,6 @@ extern SPI_HandleTypeDef hspi1;
 
 void BMI088_delay_ms(uint16_t ms)
 {
-
     osDelay(ms);
 }
 

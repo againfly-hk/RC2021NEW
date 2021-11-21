@@ -5,6 +5,17 @@
 #include "movement_struct.h"
 #include "main.h"
 
+extern CAN_HandleTypeDef hcan1;
+#define CHASSIS_CAN hcan1
+#define get_motor_measure(ptr, data)                                    \
+    {                                                                   \
+        (ptr)->last_ecd = (ptr)->ecd;                                   \
+        (ptr)->ecd = (uint16_t)((data)[0] << 8 | (data)[1]);            \
+        (ptr)->speed_rpm = (uint16_t)((data)[2] << 8 | (data)[3]);      \
+        (ptr)->given_current = (uint16_t)((data)[4] << 8 | (data)[5]);  \
+        (ptr)->temperate = (data)[6];                                   \
+    }
+		
 typedef enum
 {
     CAN_CHASSIS_ALL_ID = 0x200,

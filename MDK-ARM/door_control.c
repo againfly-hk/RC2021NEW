@@ -10,7 +10,6 @@ void left_door_off()
 {
 	__HAL_TIM_SetCompare(&htim8,TIM_CHANNEL_2,500);
 }
-//left door control
 
 void right_door_on()
 {
@@ -21,7 +20,6 @@ void right_door_off()
 {
 	__HAL_TIM_SetCompare(&htim8,TIM_CHANNEL_3,2570);
 }
-//right door control
 
 void door_left()
 {
@@ -43,8 +41,6 @@ void door_reset()
 	__HAL_TIM_SetCompare(&htim1,TIM_CHANNEL_4,500);
 }
 
-//tim1_channle4_door_control
-//__HAL_TIM_SetCompare(&htim1,TIM_CHANNEL_3,pwm_set);600,1300
 void front_door_lift()
 {
 	__HAL_TIM_SetCompare(&htim1,TIM_CHANNEL_2,600);

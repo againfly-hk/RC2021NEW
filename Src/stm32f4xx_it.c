@@ -67,7 +67,9 @@ extern UART_HandleTypeDef huart6;
 extern TIM_HandleTypeDef htim6;
 
 /* USER CODE BEGIN EV */
-
+extern uint8_t rx_line_buff[];
+extern int rx_echo;
+extern uint8_t rx_echo_buff[];
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -245,7 +247,13 @@ void SPI2_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
-
+	uint8_t temp;
+	if(__HAL_UART_GET_FLAG(&huart1,UART_FLAG_IDLE)!=RESET){
+		__HAL_UART_CLEAR_IDLEFLAG(&huart1);
+		HAL_UART_DMAStop(&huart1);
+		temp=__HAL_DMA_GET_COUNTER(&hdma_usart1_rx);
+	}
+  HAL_UART_Receive_DMA(&huart1,rx_line_buff,5);
   /* USER CODE END USART1_IRQn 0 */
   HAL_UART_IRQHandler(&huart1);
   /* USER CODE BEGIN USART1_IRQn 1 */
@@ -329,7 +337,14 @@ void DMA2_Stream7_IRQHandler(void)
 void USART6_IRQHandler(void)
 {
   /* USER CODE BEGIN USART6_IRQn 0 */
-
+	uint8_t temp;
+	if(__HAL_UART_GET_FLAG(&huart6,UART_FLAG_IDLE)!=RESET){
+		__HAL_UART_CLEAR_IDLEFLAG(&huart6);
+		HAL_UART_DMAStop(&huart6);
+		temp=__HAL_DMA_GET_COUNTER(&hdma_usart6_rx);	
+	}
+	rx_echo=rx_echo_buff[0]*256+rx_echo_buff[1];
+	HAL_UART_Receive_DMA(&huart6,rx_echo_buff,2);
   /* USER CODE END USART6_IRQn 0 */
   HAL_UART_IRQHandler(&huart6);
   /* USER CODE BEGIN USART6_IRQn 1 */
