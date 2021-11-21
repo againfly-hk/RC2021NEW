@@ -653,6 +653,11 @@
               <FileType>1</FileType>
               <FilePath>.\user_task.c</FilePath>
             </File>
+            <File>
+              <FileName>test_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\test_task.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -677,6 +682,11 @@
               <FileName>AHRS.lib</FileName>
               <FileType>4</FileType>
               <FilePath>..\Algorithm\AHRS.lib</FilePath>
+            </File>
+            <File>
+              <FileName>arm_cortexM4lf_math.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\Algorithm\arm_cortexM4lf_math.lib</FilePath>
             </File>
           </Files>
         </Group>
@@ -714,11 +724,6 @@
               <FilePath>..\BSP\bsp_flash.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_drawer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\BSP\bsp_drawer.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_crc32.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BSP\bsp_crc32.c</FilePath>
@@ -732,6 +737,11 @@
               <FileName>frame.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\frame.c</FilePath>
+            </File>
+            <File>
+              <FileName>move_pid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\move_pid.c</FilePath>
             </File>
           </Files>
         </Group>

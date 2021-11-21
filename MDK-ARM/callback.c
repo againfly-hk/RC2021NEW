@@ -10,7 +10,7 @@
 #include "AHRS_MiddleWare.h"
 #include "AHRS.h"
 #include "ultrasonic.h"
-#define gravity				9.79484
+#define gravity				9.79484f
 
 CAR car;//记录开始的姿态
 bmi088_raw_data_t 	imu_raw_data;
@@ -30,9 +30,9 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	if(GPIO_Pin==INT1_ACCEL_Pin){			
 		BMI088_read(imu_real_data.gyro,imu_real_data.accel,&imu_real_data.temp);	
 		if(accel_flag!=0){
-			car.raccel[0]=(float)1.0072*(imu_real_data.accel[0]-accel_errodata[0]);
-			car.raccel[1]=(float)1.0065*(imu_real_data.accel[1]-accel_errodata[1]);
-			car.raccel[2]=(float)1.0073*(imu_real_data.accel[2]-accel_errodata[2])+gravity;//修正校准误差
+			car.raccel[0]=1.0072f*(imu_real_data.accel[0]-accel_errodata[0]);
+			car.raccel[1]=1.0065f*(imu_real_data.accel[1]-accel_errodata[1]);
+			car.raccel[2]=1.0073f*(imu_real_data.accel[2]-accel_errodata[2])+gravity;//修正校准误差
 		}		
 	}
 	if(GPIO_Pin==INT1_GYRO_Pin){

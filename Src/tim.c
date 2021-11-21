@@ -366,7 +366,10 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* timHandle)
     HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
   /* USER CODE BEGIN TIM1_MspPostInit 1 */
-
+		HAL_TIM_Base_Start(&htim1);
+    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
+    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);		
+    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
   /* USER CODE END TIM1_MspPostInit 1 */
   }
   else if(timHandle->Instance==TIM5)
@@ -396,7 +399,10 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* timHandle)
     HAL_GPIO_Init(LED_B_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN TIM5_MspPostInit 1 */
-
+    HAL_TIM_Base_Start(&htim5);
+    HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_1);
+    HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_2);
+    HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_3);
   /* USER CODE END TIM5_MspPostInit 1 */
   }
   else if(timHandle->Instance==TIM8)
@@ -427,7 +433,10 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* timHandle)
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /* USER CODE BEGIN TIM8_MspPostInit 1 */
-
+    HAL_TIM_Base_Start(&htim8);
+		HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_1);
+    HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_2);
+		HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_3);
   /* USER CODE END TIM8_MspPostInit 1 */
   }
   else if(timHandle->Instance==TIM10)
@@ -448,7 +457,8 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* timHandle)
     HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
 
   /* USER CODE BEGIN TIM10_MspPostInit 1 */
-
+    HAL_TIM_Base_Start(&htim10);
+    HAL_TIM_PWM_Start(&htim10, TIM_CHANNEL_1);
   /* USER CODE END TIM10_MspPostInit 1 */
   }
 

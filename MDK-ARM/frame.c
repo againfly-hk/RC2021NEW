@@ -2,6 +2,7 @@
 #include "pid.h"
 #include "CAN_receive.h"
 #include "stdlib.h"
+#include "arm_math.h"
 #define frame_left_kp 0.40
 #define frame_left_ki 0.01
 #define frame_left_kd 40
