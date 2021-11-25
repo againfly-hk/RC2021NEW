@@ -31,6 +31,7 @@ typedef struct{
 }code;//3508µç»ú±àÂëÆ÷
 
 typedef struct{
+	float accel[3];
 	float raccel[3];
 	float rgyro[3];
 	float mag[3];

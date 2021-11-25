@@ -1,4 +1,5 @@
-#include "CAN_receive.h"		
+#include "CAN_receive.h"
+#include "can.h"
 static CAN_TxHeaderTypeDef  portal_frame_tx_message;
 static uint8_t              portal_frame_can_send_data[8];
 		

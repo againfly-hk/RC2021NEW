@@ -5,6 +5,7 @@
 #include "frame.h"
 #include "Callback.h"
 #include "math.h"
+#include "can.h"
 
 extern CAN_HandleTypeDef hcan1;
 extern pid_type_def frame_pid[2];
@@ -36,7 +37,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 				 break;
        }	 
     }//reveive data to calculata
-		if(i==4){
+		if(i==4||i==5){
 			if(frame_high==0)	frame_reset();
 			else	frame_code_control(i);
 		}

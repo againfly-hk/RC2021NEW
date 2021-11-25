@@ -21,7 +21,7 @@
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
-
+extern uint8_t rx_line_buff[];
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;
@@ -163,6 +163,8 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     HAL_NVIC_SetPriority(USART1_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(USART1_IRQn);
   /* USER CODE BEGIN USART1_MspInit 1 */
+		__HAL_UART_ENABLE_IT(&huart1,UART_IT_IDLE);
+		HAL_UART_Receive_DMA(&huart1,rx_line_buff,5);		
 
   /* USER CODE END USART1_MspInit 1 */
   }

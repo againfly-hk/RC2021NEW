@@ -54,6 +54,7 @@
 "version2\ahrs_middleware.o"
 "..\Algorithm\AHRS.lib"
 "..\Algorithm\arm_cortexM4lf_math.lib"
+"version2\kalman.o"
 "version2\bsp_delay.o"
 "version2\bsp_can.o"
 "version2\bsp_spi.o"

@@ -23,7 +23,7 @@ void right_door_off()
 
 void door_left()
 {
-	__HAL_TIM_SetCompare(&htim1,TIM_CHANNEL_4,2100);
+	__HAL_TIM_SetCompare(&htim1,TIM_CHANNEL_4,2050);
 }
 
 void door_middle()
@@ -33,12 +33,12 @@ void door_middle()
 
 void door_right()
 {
-	__HAL_TIM_SetCompare(&htim1,TIM_CHANNEL_4,1100);
+	__HAL_TIM_SetCompare(&htim1,TIM_CHANNEL_4,1050);
 }
 
 void door_reset()
 {
-	__HAL_TIM_SetCompare(&htim1,TIM_CHANNEL_4,500);
+	__HAL_TIM_SetCompare(&htim1,TIM_CHANNEL_4,1200);
 }
 
 void front_door_lift()

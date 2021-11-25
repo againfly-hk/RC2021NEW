@@ -5,15 +5,28 @@
 extern CAR car;
 extern motor_measure_t motor_chassis[7];
 pid_type_def motor_move_speed_pid[4];
+float angleK=100;
+float angle_limit=50;
+void move_pid_init()
+{
+	float speed_pid[3]={3.8,1,10};
+	PID_init(&motor_move_speed_pid[0],PID_POSITION,speed_pid,6000,2000);
+	PID_init(&motor_move_speed_pid[1],PID_POSITION,speed_pid,6000,2000);
+	PID_init(&motor_move_speed_pid[2],PID_POSITION,speed_pid,6000,2000);
+	PID_init(&motor_move_speed_pid[3],PID_POSITION,speed_pid,6000,2000);
+}
 
 void move_pid_calc(void)
 {
 		//相对于车体坐标系
-		//要乘以一个-1,这里是根据vx,vy,w反解出来的速度，用于速度环的控制,控制rpm  
-		car.v1=(-1*(1*car.vx+1*car.vy+28*car.w)*23.7946f);//cm/s->rpm
-		car.v2=(-1*(-1*car.vx+1*car.vy+28*car.w)*23.7946f);//cm
-		car.v3=(-1*(-1*car.vx-1*car.vy+28*car.w)*23.7946f);
-		car.v4=(-1*(1*car.vx+-1*car.vy+28*car.w)*23.7946f);
+		//要乘以一个-1,这里是根据vx,vy,w反解出来的速度，用于速度环的控制,控制rpm
+    float angle_delta=(car.begin_yaw-car.yaw)*angleK;
+	  if(angle_delta>angle_limit)	  angle_delta=angle_limit;
+		if(angle_delta<-angle_limit)	angle_delta=-angle_limit;	
+		car.v1=(-1*(1*car.vx+1*car.vy+28*car.w+angle_delta)*23.7946f);//cm/s->rpm
+		car.v2=(-1*(-1*car.vx+1*car.vy+28*car.w+angle_delta)*23.7946f);//cm
+		car.v3=(-1*(-1*car.vx-1*car.vy+28*car.w+angle_delta)*23.7946f);
+		car.v4=(-1*(1*car.vx+-1*car.vy+28*car.w+angle_delta)*23.7946f);
 		PID_calc(&motor_move_speed_pid[0],motor_chassis[0].speed_rpm,car.v1);
 		PID_calc(&motor_move_speed_pid[1],motor_chassis[1].speed_rpm,car.v2);
 		PID_calc(&motor_move_speed_pid[2],motor_chassis[2].speed_rpm,car.v3);

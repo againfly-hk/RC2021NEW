@@ -10,6 +10,7 @@
 #include "AHRS_MiddleWare.h"
 #include "AHRS.h"
 #include "ultrasonic.h"
+#include "kalman.h"
 #define gravity				9.79484f
 
 CAR car;//记录开始的姿态
@@ -26,14 +27,23 @@ float accel_errodata[3];
 float mag[3];
 float quat[4];
 
+uint8_t kalman_accel_flag=0;
+KalmanInfo accel[3];
+
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){ 
 	if(GPIO_Pin==INT1_ACCEL_Pin){			
 		BMI088_read(imu_real_data.gyro,imu_real_data.accel,&imu_real_data.temp);	
 		if(accel_flag!=0){
-			car.raccel[0]=1.0072f*(imu_real_data.accel[0]-accel_errodata[0]);
-			car.raccel[1]=1.0065f*(imu_real_data.accel[1]-accel_errodata[1]);
-			car.raccel[2]=1.0073f*(imu_real_data.accel[2]-accel_errodata[2])+gravity;//修正校准误差
-		}		
+			car.accel[0]=1.0072f*(imu_real_data.accel[0]-accel_errodata[0]);
+			car.accel[1]=1.0065f*(imu_real_data.accel[1]-accel_errodata[1]);
+			car.accel[2]=1.0073f*(imu_real_data.accel[2]-accel_errodata[2])+gravity;//修正校准误差
+		}	
+		if(kalman_accel_flag==1)
+		{
+			car.raccel[0]=KalmanFilter(&accel[0],car.accel[0]);
+			car.raccel[1]=KalmanFilter(&accel[1],car.accel[1]);
+			car.raccel[2]=KalmanFilter(&accel[2],car.accel[2]);
+		}
 	}
 	if(GPIO_Pin==INT1_GYRO_Pin){
 			BMI088_read_gyro(imu_real_data.gyro,&imu_real_data.temp);

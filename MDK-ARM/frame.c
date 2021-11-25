@@ -38,8 +38,10 @@ void frame_pid_init()
 void frame_reset()
 {
 	CAN_cmd_portal_frame(0,0,0);
-	if(frame_change[0]<5000)	frame_change[0]=0;
-	if(frame_change[1]<5000)	frame_change[1]=0;
+//	if(frame_change[0]<5000)	
+		frame_change[0]=0;
+//	if(frame_change[1]<5000)	
+		frame_change[1]=0;
 }
 
 void frame_code_control(uint16_t i)
